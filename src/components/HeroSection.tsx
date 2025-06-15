@@ -1,5 +1,6 @@
 
 import { Button } from './ui/button';
+import AnimatedTextWordByWord from './AnimatedTextWordByWord';
 
 const HeroSection = () => {
   return (
@@ -8,13 +9,18 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-background/50 z-10"></div>
         <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-4">
-                <span className="block">North London's Full-Stack Developer:</span>
-                <span className="gradient-text block mt-2">From Local Startups to High-End Apps.</span>
+                <AnimatedTextWordByWord text="Crafting Digital Experiences from North London." />
             </h1>
-            <p className="mt-4 max-w-3xl text-lg md:text-xl text-foreground/80">
-                Hi, I'm Techpreneur Joe. I build beautiful, high-quality web and native applications with expert attention to UI/UX.
+            <p
+              className="mt-4 max-w-3xl text-lg md:text-xl text-foreground/80 opacity-0 animate-fade-up"
+              style={{ animationDelay: "0.6s" }}
+            >
+                {"I'm Joe. I build fast, beautiful, and user-friendly applications."}
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div
+              className="mt-8 flex flex-wrap justify-center gap-4 opacity-0 animate-fade-up"
+              style={{ animationDelay: "0.8s" }}
+            >
                 <Button size="lg" asChild>
                     <a href="#projects">View My Work</a>
                 </Button>

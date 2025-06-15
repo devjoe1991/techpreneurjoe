@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -84,12 +83,23 @@ export default {
                     '0%': { 'background-position': '0% 50%' },
                     '50%': { 'background-position': '100% 50%' },
                     '100%': { 'background-position': '0% 50%' },
-                }
+                },
+                'fade-up': {
+                  '0%': {
+                    opacity: '0',
+                    transform: 'translateY(10px)',
+                  },
+                  '100%': {
+                    opacity: '1',
+                    transform: 'translateY(0)',
+                  },
+                },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
                 'background-pan': 'background-pan 15s ease infinite',
+                'fade-up': 'fade-up 0.5s ease-out forwards',
 			}
 		}
 	},
