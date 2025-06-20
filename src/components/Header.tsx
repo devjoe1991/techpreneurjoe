@@ -1,9 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+import { Menu, Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +21,7 @@ const Header = () => {
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#projects', label: 'Projects' },
+    { href: '/posts', label: 'Posts' },
   ];
 
   return (
@@ -26,16 +31,46 @@ const Header = () => {
           <a href="#" className="text-2xl font-bold font-heading gradient-text">
             Joe
           </a>
-          <nav className="hidden md:flex items-center space-x-8">
-            {navLinks.map(link => (
-              <a key={link.href} href={link.href} className="text-foreground/80 hover:text-primary transition-colors">
+          <nav className="hidden md:flex items-center space-x-6">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.label}
+                to={link.href}
+                className={({ isActive }) =>
+                  `text-lg font-medium transition-colors hover:text-primary ${
+                    isActive ? 'text-primary' : 'text-foreground/60'
+                  }`
+                }
+              >
                 {link.label}
-              </a>
+              </NavLink>
             ))}
           </nav>
           <Button asChild>
             <a href="#contact">Get In Touch</a>
           </Button>
+          <Sheet>
+            <SheetTrigger>
+              <Menu className="md:hidden" />
+            </SheetTrigger>
+            <SheetContent side="right">
+              <nav className="flex flex-col space-y-4">
+                {navLinks.map((link) => (
+                  <NavLink
+                    key={link.label}
+                    to={link.href}
+                    className={({ isActive }) =>
+                      `text-lg font-medium transition-colors hover:text-primary ${
+                        isActive ? 'text-primary' : 'text-foreground/80'
+                      }`
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>

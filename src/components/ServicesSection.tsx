@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react';
 import AnimatedSection from './AnimatedSection';
 import { Card, CardContent } from './ui/card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from './ui/carousel';
 
 const services = [
   {
@@ -38,13 +39,30 @@ const services = [
 ];
 
 const ServicesSection = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
   return (
     <AnimatedSection id="services" className="py-20 lg:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold">What I Can Build For You</h2>
         </div>
-        <Carousel className="w-full max-w-6xl mx-auto">
+        <Carousel setApi={setApi} className="w-full max-w-6xl mx-auto">
           <CarouselContent>
             {services.map((service) => (
               <CarouselItem key={service.title} className="md:basis-1/2 lg:basis-1/3">
@@ -63,6 +81,16 @@ const ServicesSection = () => {
           <CarouselPrevious className="hidden md:flex" />
           <CarouselNext className="hidden md:flex" />
         </Carousel>
+        <div className="flex justify-center gap-2 mt-8">
+          {Array.from({ length: count }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => api?.scrollTo(i)}
+              className={`w-2 h-2 rounded-full transition-colors ${i === current - 1 ? 'bg-primary' : 'bg-foreground/20'}`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </AnimatedSection>
   );

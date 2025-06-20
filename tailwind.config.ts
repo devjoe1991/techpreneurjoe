@@ -21,7 +21,34 @@ export default {
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
                 heading: ['Syne', 'sans-serif'],
+                serif: ['Lora', 'serif'],
             },
+            typography: ({ theme }) => ({
+                DEFAULT: {
+                    css: {
+                        color: theme('colors.slate.200'),
+                        'p, ul, ol, blockquote': {
+                            'line-height': '1.7',
+                        },
+                        p: {
+                            'font-size': '1.125rem',
+                        },
+                        h1: {
+                            'font-family': theme('fontFamily.heading'),
+                        },
+                        'h2, h3, h4, h5, h6': {
+                            'font-family': theme('fontFamily.heading'),
+                            color: theme('colors.white'),
+                        },
+                        a: {
+                            color: theme('colors.primary.DEFAULT'),
+                            '&:hover': {
+                                color: theme('colors.primary.foreground'),
+                            },
+                        },
+                    },
+                },
+            }),
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -103,5 +130,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;

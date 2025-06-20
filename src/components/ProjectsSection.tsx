@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react';
 import AnimatedSection from './AnimatedSection';
 import { Card, CardContent } from './ui/card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from './ui/carousel';
 import { Button } from './ui/button';
 import boroughlyImage from '@/images/boroughly.png';
 import neighbourhoodwashImage from '@/images/neighbourhoodwash.png';
@@ -21,6 +22,23 @@ const projects = [
 ];
 
 const ProjectsSection = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
   return (
     <AnimatedSection id="projects" className="py-20 lg:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,7 +48,7 @@ const ProjectsSection = () => {
             Here are a couple of projects I've built from the ground up.
           </p>
         </div>
-        <Carousel className="w-full max-w-4xl mx-auto">
+        <Carousel setApi={setApi} className="w-full max-w-4xl mx-auto">
           <CarouselContent>
             {projects.map((project) => (
               <CarouselItem key={project.title}>
@@ -54,6 +72,16 @@ const ProjectsSection = () => {
           <CarouselPrevious className="hidden md:flex" />
           <CarouselNext className="hidden md:flex" />
         </Carousel>
+        <div className="flex justify-center gap-2 mt-8">
+          {Array.from({ length: count }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => api?.scrollTo(i)}
+              className={`w-2 h-2 rounded-full transition-colors ${i === current - 1 ? 'bg-primary' : 'bg-foreground/20'}`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </AnimatedSection>
   );
