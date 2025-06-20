@@ -11,6 +11,7 @@ export default defineConfig(() => ({
   plugins: [
     react(),
   ],
+  assetsInclude: ['**/*.PNG', '**/*.png'],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
