@@ -1,4 +1,3 @@
-
 import AnimatedSection from './AnimatedSection';
 import { Button } from './ui/button';
 
@@ -13,8 +12,8 @@ const ContactSection = () => {
           Have a project in mind? I'd love to hear about it.
         </p>
         <Button size="lg" asChild>
-          <a href="mailto:hello@techpreneurjoe.com">
-            hello@techpreneurjoe.com
+          <a href="mailto:dev.joe91@gmail.com">
+            Email Me
           </a>
         </Button>
       </div>

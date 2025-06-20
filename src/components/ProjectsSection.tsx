@@ -1,20 +1,21 @@
-
 import AnimatedSection from './AnimatedSection';
 import { Card, CardContent } from './ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 import { Button } from './ui/button';
+import boroughlyImage from '@/images/boroughly.png';
+import neighbourhoodwashImage from '@/images/neighbourhoodwash.png';
 
 const projects = [
   {
     title: 'boroughly.com',
     description: "A community-focused platform connecting local residents. The challenge was to create a highly interactive and scalable social hub. The solution involved a robust back-end with a real-time front-end framework.",
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+    image: boroughlyImage,
     link: '#',
   },
   {
     title: 'neighbourhoodwash.com',
-    description: "An on-demand car wash service app for local neighbourhoods. The goal was to build a seamless booking and payment system. I developed a native app with a user-friendly interface and a secure payment gateway.",
-    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+    description: "Your friendly neighbourhood laundry solution. The goal was to build a seamless booking and payment system. I developed a native app with a user-friendly interface and a secure payment gateway.",
+    image: neighbourhoodwashImage,
     link: '#',
   },
 ];

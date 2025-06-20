@@ -1,5 +1,5 @@
-
 import AnimatedSection from './AnimatedSection';
+import { decodeHtmlEntities } from '@/lib/utils';
 
 const AboutSection = () => {
   return (
@@ -21,15 +21,15 @@ const AboutSection = () => {
               <h3 className="text-2xl font-bold mb-4 gradient-text">My Ethos</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
-                    <span className="text-primary mr-3 mt-1">&#10003;</span>
+                    <span className="text-primary mr-3 mt-1">{decodeHtmlEntities('&#10003;')}</span>
                     <span><strong className="text-foreground">Detail-Oriented:</strong> Pixel-perfect implementation is not an option, it's a requirement.</span>
                 </li>
                 <li className="flex items-start">
-                    <span className="text-primary mr-3 mt-1">&#10003;</span>
+                    <span className="text-primary mr-3 mt-1">{decodeHtmlEntities('&#10003;')}</span>
                     <span><strong className="text-foreground">Quality-Driven:</strong> I build robust, scalable, and maintainable applications that stand the test of time.</span>
                 </li>
                 <li className="flex items-start">
-                    <span className="text-primary mr-3 mt-1">&#10003;</span>
+                    <span className="text-primary mr-3 mt-1">{decodeHtmlEntities('&#10003;')}</span>
                     <span><strong className="text-foreground">User-Centric:</strong> Crafting intuitive and delightful user experiences is at the core of my work.</span>
                 </li>
               </ul>

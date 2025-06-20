@@ -1,15 +1,20 @@
-
 import { Button } from './ui/button';
-import AnimatedTextWordByWord from './AnimatedTextWordByWord';
+import { ColourfulText } from './ColourfulText';
 
 const HeroSection = () => {
+  const lines = ["Crafting", "Digital", "Experiences", "from", "North London."];
+
   return (
     <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 animated-gradient-bg z-0"></div>
         <div className="absolute inset-0 bg-background/50 z-10"></div>
         <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-4">
-                <AnimatedTextWordByWord text="Crafting Digital Experiences from North London." />
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4 leading-normal font-heading">
+              {lines.map((line) => (
+                <div key={line}>
+                  <ColourfulText text={line} />
+                </div>
+              ))}
             </h1>
             <p
               className="mt-4 max-w-3xl text-lg md:text-xl text-foreground/80 opacity-0 animate-fade-up"

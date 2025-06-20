@@ -1,25 +1,22 @@
-
 import React from 'react';
 
 interface AnimatedTextWordByWordProps {
-  text: string;
+  lines: string[];
   className?: string;
   stagger?: number;
 }
 
-const AnimatedTextWordByWord = ({ text, className, stagger = 0.08 }: AnimatedTextWordByWordProps) => {
-  const words = text.split(' ');
-
+const AnimatedTextWordByWord = ({ lines, className, stagger = 0.08 }: AnimatedTextWordByWordProps) => {
   return (
     <span className={className}>
-      {words.map((word, i) => (
-        <span
-          key={`${word}-${i}`}
-          className="inline-block opacity-0 animate-fade-up"
+      {lines.map((line, i) => (
+        <div
+          key={`${line}-${i}`}
+          className="opacity-0 animate-fade-up"
           style={{ animationDelay: `${i * stagger}s` }}
         >
-          {word}&nbsp;
-        </span>
+          {line}
+        </div>
       ))}
     </span>
   );

@@ -1,16 +1,15 @@
-
 import AnimatedSection from './AnimatedSection';
 import { Card, CardContent } from './ui/card';
 
 const testimonials = [
   {
     quote: "Joe's attention to detail is second to none. He delivered a high-quality app that exceeded our expectations.",
-    name: 'Jane Doe',
+    name: 'Sarah Jones',
     company: 'High-End Client Inc.',
   },
   {
     quote: "Working with Joe was a breeze. He understood our vision for our local business and brought it to life beautifully.",
-    name: 'John Smith',
+    name: 'Michael Miller',
     company: 'Local Cafe',
   },
 ];
