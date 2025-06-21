@@ -3,7 +3,6 @@ import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { Menu, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,11 +16,21 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const navLinks = [
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#projects', label: 'Projects' },
-    { href: '/posts', label: 'Posts' },
   ];
 
   return (
@@ -33,21 +42,18 @@ const Header = () => {
           </a>
           <nav className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
-              <NavLink
+              <a
                 key={link.label}
-                to={link.href}
-                className={({ isActive }) =>
-                  `text-lg font-medium transition-colors hover:text-primary ${
-                    isActive ? 'text-primary' : 'text-foreground/60'
-                  }`
-                }
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-lg font-medium transition-colors text-foreground/60 hover:text-primary"
               >
                 {link.label}
-              </NavLink>
+              </a>
             ))}
           </nav>
           <Button asChild>
-            <a href="#contact">Get In Touch</a>
+            <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')}>Get In Touch</a>
           </Button>
           <Sheet>
             <SheetTrigger>
@@ -56,17 +62,14 @@ const Header = () => {
             <SheetContent side="right">
               <nav className="flex flex-col space-y-4">
                 {navLinks.map((link) => (
-                  <NavLink
+                  <a
                     key={link.label}
-                    to={link.href}
-                    className={({ isActive }) =>
-                      `text-lg font-medium transition-colors hover:text-primary ${
-                        isActive ? 'text-primary' : 'text-foreground/80'
-                      }`
-                    }
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="text-lg font-medium transition-colors text-foreground/80 hover:text-primary"
                   >
                     {link.label}
-                  </NavLink>
+                  </a>
                 ))}
               </nav>
             </SheetContent>
