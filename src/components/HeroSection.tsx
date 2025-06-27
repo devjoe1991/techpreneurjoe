@@ -1,12 +1,13 @@
 import { Button } from './ui/button';
 import { ColourfulText } from './ColourfulText';
+import { BackgroundGradientAnimation } from "./ui/background-gradient-animation";
 
 const HeroSection = () => {
   const lines = ["Crafting", "Digital", "Experiences", "from", "North London."];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
-        <div className="absolute inset-0 animated-gradient-bg z-0"></div>
+        <BackgroundGradientAnimation containerClassName="absolute inset-0 h-full w-full z-0" />
         <div className="absolute inset-0 bg-background/50 z-10"></div>
         <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4 leading-normal font-heading">
