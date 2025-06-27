@@ -1,24 +1,62 @@
-import React from 'react';
+import { motion, Variants } from "framer-motion";
 
-interface AnimatedTextWordByWordProps {
-  lines: string[];
+const AnimatedTextWordByWord = ({
+  text,
+  className,
+}: {
+  text: string;
   className?: string;
-  stagger?: number;
-}
+}) => {
+  const words = text.split(" ");
 
-const AnimatedTextWordByWord = ({ lines, className, stagger = 0.08 }: AnimatedTextWordByWordProps) => {
+  const container: Variants = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.12, delayChildren: 0.04 * i },
+    }),
+  };
+
+  const child: Variants = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      y: 20,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+  };
+
   return (
-    <span className={className}>
-      {lines.map((line, i) => (
-        <div
-          key={`${line}-${i}`}
-          className="opacity-0 animate-fade-up"
-          style={{ animationDelay: `${i * stagger}s` }}
-        >
-          {line}
-        </div>
+    <motion.div
+      style={{
+        overflow: "hidden",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      className={`${className} gap-x-2 gap-y-2 md:gap-x-4 md:gap-y-4`}
+    >
+      {words.map((word, index) => (
+        <motion.span variants={child} key={index}>
+          {word}
+        </motion.span>
       ))}
-    </span>
+    </motion.div>
   );
 };
 
